@@ -1,0 +1,140 @@
+:root {
+    --c1: #524267;
+    --c2: #5D9285;
+}
+
+*, *::before, *::after {
+    margin: 0;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: rgb(11,9,17);
+    background: linear-gradient(180deg, rgb(10, 8, 17) 0%, rgb(49, 33, 63) 70%, rgb(51, 33, 65) 100%);
+}
+
+.page {
+    width: 100vw;
+}
+
+.header__title {
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.header__title__text {
+    display: inline-block;
+    margin: 6rem 0 0 0;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 6.4rem;
+    letter-spacing: 4px;
+    text-shadow: 0 0 2px #FFF, 2px 2px 12px #FFF;
+}
+
+.store {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.store__items {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.store__items__popup {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #FFF;
+}
+
+.store__items__grid {
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6rem 0;
+    justify-items: center;
+    align-items: center;
+    padding: 2rem 0 6rem 0;
+}
+
+.store__items__grid__item {
+    width: 275px;
+    height: 375px;
+    border: 0.3rem solid #FEFEFE;
+    box-shadow: 0 0 12px 1px #FFF;
+    background-color: #7a6299;
+    background-image: url("../img/banner-blue50.jpg");
+    background-size: cover;
+    opacity: 1;
+    animation: fade-in 900ms linear;
+    transition: transform 100ms ease-out;
+}
+
+.store__items__grid__item:hover, .store__items__grid__item:focus {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+
+.store__description {
+    background-color: #EEE;
+    box-shadow: 0 0 4px 0 #000 inset;
+}
+
+.store__description__text {
+    margin: 6rem;
+    color: #111;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    line-height: 2.6rem;
+    font-weight: 500;
+}
+
+
+@media only screen and (max-width: 1100px) {
+    .store__items__grid {
+        width: 80%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .header__title__text {
+        margin: 3rem 0 1rem 0;
+        font-size: 2.4rem;
+        font-weight: bold;
+    }
+    .store__items__grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+    .store__items__grid__item {
+        width: 200px;
+        height: 300px;
+    }
+    .store__description__text {
+        margin: 1rem;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.nodisplay {
+    display: none !important;
+}
