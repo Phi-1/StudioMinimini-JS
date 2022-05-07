@@ -4,13 +4,13 @@ export default class Classnames {
     static store_item = "store__items__grid__item"
     static store_popup = {
         window: "store__items__popup",
-        image: "store__items__popup__image",
+        body: "store__items__popup__body",
         title: "store__items__popup__title",
         description: "store__items__popup__description",
         button_close: "store__items__popup__btn-close",
         pricetag: "store__items__popup__pricetag",
         button_reserve: "store__items__popup__btn-reserve",
         form: "store__items__popup__form",
-
+        button_fullscreen: "btn-fullscreen"
     }
 }
