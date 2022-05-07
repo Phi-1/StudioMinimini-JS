@@ -11,8 +11,6 @@ class StorePopup {
     static e_button_close = document.querySelector(`.${Classnames.store_popup.button_close}`)
     static e_button_reserve = document.querySelector(`.${Classnames.store_popup.button_reserve}`)
     static e_form = document.querySelector(`.${Classnames.store_popup.form}`)
-    // Currently selected item
-    static current_item = undefined
 
     static init() {
         // close button event
@@ -20,9 +18,6 @@ class StorePopup {
     }
 
     static render(item_id, item_props) {
-        // set current item
-        StorePopup.current_item = item_props
-        StorePopup.current_item["id"] = item_id
         // set element content
         StorePopup.e_image.style["background-image"] = `url(static/img/store_items/${item_id}.png)`
         StorePopup.e_title.innerText = item_props["title"]
