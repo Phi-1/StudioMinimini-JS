@@ -12,6 +12,7 @@
     <link rel="icon" href="static/img/minimini-icon3.png">
     <link rel="stylesheet" href="static/css/index.css">
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous" defer></script>
+    <script type="module" src="static/js/Classnames.mjs" defer></script>
     <script type="module" src="static/js/Store.mjs" defer></script>
     <script type="module" src="static/js/index.mjs" defer></script>
     <title>Studio Minimini</title>
@@ -32,7 +33,20 @@
                 <section class="store__items__grid">
                     
                 </section>
-                <div class="store__items__popup nodisplay"></div>
+                <div class="store__items__popup nodisplay">
+                    <section class="store__items__popup__image"></section>
+                    <section class="store__items__popup__body">
+                        <h1 class="store__items__popup__title">Product title</h1>
+                        <div class="store__items__popup__btn-close">x</div>
+                        <p class="store__items__popup__description">Product description</p>
+                        <span class="store__items__popup__disclaimer">Please note that these items are limited and are sold on a first-come, first-serve basis.</span>
+                        <span class="store__items__popup__pricetag">&euro;55,-</span>     
+                        <form action="" class="store__items__popup__form">
+                            <input type="text" name="email" id="input-email" placeholder="Enter your email address" autocomplete="off" required>
+                            <input type="submit" value="Reserve" class="store__items__popup__btn-reserve">
+                        </form>
+                    </section>
+                </div>
             </div>
 
             <section class="store__description">

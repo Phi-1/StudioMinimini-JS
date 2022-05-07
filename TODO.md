@@ -1,4 +1,3 @@
 - implement popup interface in html/css
-- expand store item eventlistener to populate popup text
 - add main website text to database and request interface
 - make app/cli to add items and change main text

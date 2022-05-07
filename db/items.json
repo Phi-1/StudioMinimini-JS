@@ -1,1 +1,1 @@
-{"items": {"item_id": {"title": "test item", "description": "this is a test", "price": 3401}}}
+{"items": {"item_id": {"title": "test item", "description": "this is a test", "price": 3401, "reserved": false}}}

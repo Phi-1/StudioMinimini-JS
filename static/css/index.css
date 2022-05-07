@@ -29,6 +29,7 @@ body {
     font-family: 'Share Tech Mono', monospace;
     font-size: 6.4rem;
     letter-spacing: 4px;
+    line-height: 1.5;
     text-shadow: 0 0 2px #FFF, 2px 2px 12px #FFF;
 }
 
@@ -40,19 +41,62 @@ body {
 
 .store__items {
     position: relative;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .store__items__popup {
-    display: inline-block;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: #FFF;
+}
+
+.store__items__popup__image {
+    background-size: cover;
+    background-position: center;
+}
+
+.store__items__popup__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    font-family: 'EB Garamond', serif;
+}
+
+.store__items__popup__title {
+    grid-row: 1 / 2;
+    justify-self: center;
+}
+
+.store__items__popup__btn-close {
+    grid-row: 1 / 2;
+    justify-self: end;
+}
+
+.store__items__popup__btn-close:hover {
+    cursor: pointer;
+}
+
+.store__items__popup__description {
+    grid-row: 2 / 3;
+}
+
+.store__items__popup__disclaimer {
+    grid-row: 3 / 4;
+}
+
+.store__items__popup__pricetag {
+    grid-row: 4 / 5;
+}
+
+.store__items__popup__form {
+    grid-row: 4 / 5;
 }
 
 .store__items__grid {
