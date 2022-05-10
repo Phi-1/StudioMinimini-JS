@@ -66,7 +66,9 @@ body {
     justify-content: center;
 }
 
+/* Store popup */
 .store__items__popup {
+    z-index: 1;
     position: fixed;
     top: 10%;
     right: 10%;
@@ -123,12 +125,35 @@ body {
     border-left: 2px solid white;
 }
 
+.store__items__popup__arrow-left {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    border-top: 1.4rem solid transparent;
+    border-bottom: 1.4rem solid transparent;
+    border-right: 1.4rem solid white;
+}
+
+.store__items__popup__arrow-right {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    border-top: 1.4rem solid transparent;
+    border-bottom: 1.4rem solid transparent;
+    border-left: 1.4rem solid white;
+}
+
+.store__items__popup__arrow-left:hover, .store__items__popup__arrow-right:hover {
+    cursor: pointer;
+}
+
 .store__items__popup__body {
+    z-index: 2;
     width: 40%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: 1fr min-content 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto auto auto;
     background-color: rgba(34, 34, 34, 0.95);
     font-family: 'EB Garamond', serif;
     color: #FFF;
@@ -164,7 +189,9 @@ body {
 .store__items__popup__disclaimer {
     grid-column: 1 / -1;
     grid-row: 3 / 4;
-    margin: 3rem;
+    align-self: center;
+    justify-self: center;
+    margin: 0 0 0.8rem 0;
     font-style: italic;
 }
 
@@ -172,15 +199,37 @@ body {
     grid-row: 4 / 5;
     justify-self: end;
     align-self: end;
-    margin: 0.6rem 1rem;
+    margin: 0.6rem 0.2rem;
+    font-size: 1.2rem;
 }
 
 .store__items__popup__form {
     grid-row: 5 / 6;
-    align-self: end;
+    align-self: center;
     justify-self: end;
+    margin-bottom: 0.4rem;
 }
 
+.store__items__popup__form > input#input-email {
+    padding: 0.6rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    border: none;
+    outline: none;
+}
+
+.store__items__popup__btn-reserve {
+    padding: 0.6rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #EEE;
+    background-color: #5D9285;
+    border: none;
+}
+
+/* Store items */
 .store__items__grid {
     width: 70%;
     display: grid;
@@ -209,7 +258,7 @@ body {
     cursor: pointer;
 }
 
-
+/* Store text */
 .store__description {
     background-color: #EEE;
     box-shadow: 0 0 4px 0 #000 inset;

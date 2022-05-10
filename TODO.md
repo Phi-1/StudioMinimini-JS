@@ -1,3 +1,4 @@
-- implement popup interface in html/css
+- make popup close when clicking off it
 - add main website text to database and request interface
 - make app/cli to add items and change main text
+- MAKE SURE post app checks if uploaded image with the same name already exists in folder

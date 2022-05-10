@@ -1,1 +1,1 @@
-{"items": {"item_id": {"title": "test item", "description": "this is a test", "price": 3401, "reserved": false}}}
+{"items": {"item_id": {"title": "test item", "description": "this is a test", "price": 3401, "reserved": false, "images": ["item_id.png", "images.jpg", "hsvsd.JPG", "elon_wario.0.jpg"]}}}

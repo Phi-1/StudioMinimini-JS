@@ -18,7 +18,8 @@ class JSON_DB:
             "item-id": {
                 "title": "test item",
                 "description": "this is a test",
-                "price": 34_01
+                "price": 34_01,
+                "images": ["testitem.png"]
             }
         }
     }
