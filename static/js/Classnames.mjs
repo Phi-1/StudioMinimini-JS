@@ -3,6 +3,7 @@ export default class Classnames {
     static store_grid = "store__items__grid"
     static store_item = "store__items__grid__item"
     static store_popup = {
+        container: "store__popup__container",
         window: "store__items__popup",
         body: "store__items__popup__body",
         title: "store__items__popup__title",

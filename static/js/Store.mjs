@@ -3,6 +3,7 @@ import Classnames from "./Classnames.mjs"
 
 class StorePopup {
     // Elements
+    static e_container = document.querySelector(`.${Classnames.store_popup.container}`)
     static e_popup = document.querySelector(`.${Classnames.store_popup.window}`)
     static e_popup_body = document.querySelector(`.${Classnames.store_popup.body}`)
     static e_title = document.querySelector(`.${Classnames.store_popup.title}`)
@@ -27,6 +28,7 @@ class StorePopup {
         // image carousel arrows
         StorePopup.e_arrow_left.addEventListener("click", StorePopup.arrow_left_event)
         StorePopup.e_arrow_right.addEventListener("click", StorePopup.arrow_right_event)
+        StorePopup.e_container.addEventListener("click", StorePopup.container_event)
     }
 
     static render(item_id, item_props) {
@@ -38,11 +40,17 @@ class StorePopup {
         StorePopup.e_description.innerText = item_props["description"]
         const price_string = String(item_props["price"]).slice(0, -2) + "," + String(item_props["price"]).slice(-2)
         StorePopup.e_pricetag.innerHTML = `&euro; ${price_string}`
-        StorePopup.e_popup.classList.toggle(Classnames.no_display)
+        StorePopup.e_container.classList.toggle(Classnames.no_display)
     }
 
     static close_button_event(event) {
-        StorePopup.e_popup.classList.toggle(Classnames.no_display)
+        StorePopup.e_container.classList.toggle(Classnames.no_display)
+    }
+
+    static container_event(event) {
+        if (event.target === StorePopup.e_container) {
+            StorePopup.e_container.classList.toggle(Classnames.no_display)
+        }
     }
 
     static fullscreen_button_event(event) {
