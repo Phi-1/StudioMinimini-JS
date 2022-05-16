@@ -1,4 +1,5 @@
 import Classnames from "./Classnames.mjs"
+import SocketHandler from "./SocketHandler.mjs"
 
 
 class StorePopup {
@@ -75,6 +76,10 @@ export default class Store {
     static e_grid = document.querySelector(`.${Classnames.store_grid}`)
 
     static init() {
+        SocketHandler.listen("store_items", (data) => {
+            Store.update(data["items"])
+        })
+        SocketHandler.emit("request_items")
         StorePopup.init()
     }
 

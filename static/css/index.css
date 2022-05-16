@@ -1,6 +1,6 @@
 :root {
-    --c1: #524267;
-    --c2: #5D9285;
+    --c1: rgb(82, 66, 103);
+    --c2: rgb(93, 146, 133);
     --scrollbar-width: 10px;
 }
 
@@ -34,6 +34,7 @@ body {
 }
 
 .page {
+    position: relative;
     width: calc(100vw - var(--scrollbar-width));
 }
 
@@ -82,7 +83,8 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #222;
+    /* background-color: #222; */
+    background-color: #111;
     box-shadow: 0 1px 2rem rgba(0, 0, 0, 0.3);
     border: 2px solid black;
 }
@@ -91,8 +93,8 @@ body {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     background-image: url("../img/fullscreen_icon_outline.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -100,6 +102,7 @@ body {
 
 .btn-fullscreen:hover {
     cursor: pointer;
+    box-shadow: 0 0 2px 2px #FFF, 0 0 20px #FFF;
 }
 
 .store__items__popup__arrow-left {
@@ -261,6 +264,31 @@ body {
     font-weight: 500;
 }
 
+.btn-admin-login {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    background-image: url("../img/admin_icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.6);
+}
+
+.btn-admin-login:hover {
+    cursor: pointer;
+}
+
+.admin-login {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 @media only screen and (max-width: 1100px) {
     ::-webkit-scrollbar {
@@ -323,5 +351,9 @@ body {
 }
 
 .nodisplay {
+    display: none !important;
+}
+
+.admin {
     display: none !important;
 }

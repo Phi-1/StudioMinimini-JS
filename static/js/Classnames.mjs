@@ -1,8 +1,14 @@
-export default class Classnames {
-    static no_display = "nodisplay"
-    static store_grid = "store__items__grid"
-    static store_item = "store__items__grid__item"
-    static store_popup = {
+export default {
+    no_display: "nodisplay",
+    admin: {
+        button_login: "btn-admin-login",
+        popup: "admin-login",
+        form: "admin-form",
+        field_password: "admin-form-password"
+    },
+    store_grid: "store__items__grid",
+    store_item: "store__items__grid__item",
+    store_popup: {
         container: "store__popup__container",
         window: "store__items__popup",
         body: "store__items__popup__body",

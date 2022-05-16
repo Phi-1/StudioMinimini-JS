@@ -1,15 +1,12 @@
+import Admin from "./Admin.mjs"
 import Classnames from "./Classnames.mjs"
+import SocketHandler from "./SocketHandler.mjs"
 import Store from "./Store.mjs"
 
-const socket = io()
-
-socket.on("store_items", (data) => {
-    Store.update(data["items"])
-})
-
 function main() {
-    Store.init()   
-    socket.emit("request_items")
+    SocketHandler.init()
+    Store.init()
+    Admin.init()
 }
 
 main()

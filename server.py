@@ -28,6 +28,10 @@ def index():
 def send_items():
     emit("store_items", db.get_items(), broadcast=False)
 
+@SOCKET.on("admin_login")
+def admin_login(data):
+    print(data["password"])
+
 # Main
 if __name__ == "__main__":
     load_dotenv()

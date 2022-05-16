@@ -11,8 +11,9 @@
 
     <link rel="icon" href="static/img/minimini-icon3.png">
     <link rel="stylesheet" href="static/css/index.css">
-    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous" defer></script>
     <script type="module" src="static/js/Classnames.mjs" defer></script>
+    <script type="module" src="static/js/SocketHandler.mjs" defer></script>
+    <script type="module" src="static/js/Admin.mjs" defer></script>
     <script type="module" src="static/js/Store.mjs" defer></script>
     <script type="module" src="static/js/index.mjs" defer></script>
     <title>STUDIOMINIMINI</title>
@@ -59,6 +60,17 @@
                 </p>
             </section>
         </main>
+
+        <footer>
+
+        </footer>
+
+        <div class="btn-admin-login"></div>
+        <div class="admin-login nodisplay">
+            <form class="admin-form">
+                <input type="text" name="admin-password" class="admin-form-password" required autocomplete="off">
+            </form>
+        </div>
 
     </div>
 </body>
