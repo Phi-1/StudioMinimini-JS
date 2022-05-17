@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 import os
 from src.json_db import JSON_DB as db
+from src.admin import Admin
 
 # Globals
 SERVER = Flask(__name__)
@@ -30,7 +31,7 @@ def send_items():
 
 @SOCKET.on("admin_login")
 def admin_login(data):
-    print(data["password"])
+    print(Admin.admin_login(data["password"]))
 
 # Main
 if __name__ == "__main__":
@@ -40,5 +41,6 @@ if __name__ == "__main__":
     db_path = os.environ.get("DB_PATH")
 
     db.connect(db_path)
+    Admin.set_password(os.environ.get("ADMIN_PASSWORD"))
 
     SOCKET.run(SERVER, host="0.0.0.0", port=server_port, debug=True)

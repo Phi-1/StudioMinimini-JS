@@ -84,7 +84,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     /* background-color: #222; */
-    background-color: #111;
+    background-color: rgba(20, 17, 19, 1);
     box-shadow: 0 1px 2rem rgba(0, 0, 0, 0.3);
     border: 2px solid black;
 }
@@ -93,8 +93,8 @@ body {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    width: 3rem;
-    height: 3rem;
+    width: 2.4rem;
+    height: 2.4rem;
     background-image: url("../img/fullscreen_icon_outline.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -139,7 +139,8 @@ body {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr auto auto auto;
-    background-color: rgba(34, 34, 34, 0.97);
+    /* background-color: rgba(34, 34, 34, 0.97); */
+    background-color: rgba(20, 17, 19, 0.97);
     font-family: 'EB Garamond', serif;
     color: #EEE;
     box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.8);
