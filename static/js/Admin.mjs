@@ -8,6 +8,18 @@ export default class Admin {
         Admin._bind_events()
     }
 
+    static admin_login(token) {
+        Admin.admin_token = token
+        // Make all admin-only elements visible
+        document.querySelectorAll(`.${Classnames.admin.hidden}`).forEach((element, index) => {
+            element.classList.remove(Classnames.admin.hidden)
+        })
+    }
+
+    static get_token() {
+        return Admin.admin_token
+    }
+
     static _bind_events() {
         // ELements
         const btn_popup = document.querySelector(`.${Classnames.admin.button_login}`)
@@ -35,6 +47,11 @@ export default class Admin {
             SocketHandler.emit("admin_login", {password: password})
             field_password.value = ""
             popup.classList.toggle(Classnames.no_display)
+        })
+
+        // Listen for admin token
+        SocketHandler.listen("admin_login", (data) => {
+            Admin.admin_login(data["token"])
         })
     }
 

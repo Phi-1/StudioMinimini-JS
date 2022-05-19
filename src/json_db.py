@@ -45,5 +45,12 @@ class JSON_DB:
         JSON_DB.save_data()
 
     @staticmethod
+    def delete_item(item_id):
+        if not item_id in JSON_DB.DATA["items"]:
+            return
+        del JSON_DB.DATA["items"][item_id]
+        JSON_DB.save_data()
+
+    @staticmethod
     def get_items():
         return JSON_DB.DATA

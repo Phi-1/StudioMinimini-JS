@@ -232,6 +232,7 @@ body {
 }
 
 .store__items__grid__item {
+    position: relative;
     width: 275px;
     height: 375px;
     border: 0.3rem solid #FEFEFE;
@@ -247,6 +248,18 @@ body {
 .store__items__grid__item:hover, .store__items__grid__item:focus {
     transform: scale(1.02);
     cursor: pointer;
+}
+
+.store__items__grid__item__btn-delete {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 2rem;
+    height: 2rem;
+    background-image: url("../img/delete_icon_black_2.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* Store text */

@@ -1,4 +1,5 @@
-- add admin account. .admin class is invisible and removed when admin logs in. When interacted with, elements still check valid admin login through ids saved on both server and client
+- add confirmation to element delete button
+- save admin token to cookies
 - add main website text to database and request interface
 - make app/cli to add items and change main text
 - MAKE SURE post app checks if uploaded image with the same name already exists in folder

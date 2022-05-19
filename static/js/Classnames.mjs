@@ -4,10 +4,12 @@ export default {
         button_login: "btn-admin-login",
         popup: "admin-login",
         form: "admin-form",
-        field_password: "admin-form-password"
+        field_password: "admin-form-password",
+        hidden: "admin"
     },
     store_grid: "store__items__grid",
     store_item: "store__items__grid__item",
+    store_item_btn_delete: "store__items__grid__item__btn-delete",
     store_popup: {
         container: "store__popup__container",
         window: "store__items__popup",

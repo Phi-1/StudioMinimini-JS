@@ -3,6 +3,8 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 import os
+
+from numpy import broadcast
 from src.json_db import JSON_DB as db
 from src.admin import Admin
 
@@ -31,7 +33,16 @@ def send_items():
 
 @SOCKET.on("admin_login")
 def admin_login(data):
-    print(Admin.admin_login(data["password"]))
+    token = Admin.admin_login(data["password"])
+    if token:
+        emit("admin_login", {"token": token}, broadcast=False)
+
+@SOCKET.on("delete_item")
+def delete_item(data):
+    if not Admin.check_token(data["admin_token"]):
+        return
+    db.delete_item(data["item_id"])
+    emit("update", db.get_items(), broadcast=True)
 
 # Main
 if __name__ == "__main__":

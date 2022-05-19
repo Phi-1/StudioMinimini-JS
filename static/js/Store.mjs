@@ -1,3 +1,4 @@
+import Admin from "./Admin.mjs"
 import Classnames from "./Classnames.mjs"
 import SocketHandler from "./SocketHandler.mjs"
 
@@ -79,6 +80,9 @@ export default class Store {
         SocketHandler.listen("store_items", (data) => {
             Store.update(data["items"])
         })
+        SocketHandler.listen("update", (data) => {
+            Store.update(data["items"])
+        })
         SocketHandler.emit("request_items")
         StorePopup.init()
     }
@@ -102,15 +106,33 @@ export default class Store {
             // add click eventlistener
             if (!Store.items[item_id]["reserved"]) {
                 new_item.addEventListener("click", Store.generate_click_event(item_id))
-            }    
+            }
+            // add admin-only delete button
+            const btn_delete = document.createElement("div")
+            btn_delete.classList.add(Classnames.store_item_btn_delete)
+            btn_delete.classList.add(Classnames.admin.hidden)
+            btn_delete.addEventListener("click", Store.generate_delete_event(item_id))
+            new_item.appendChild(btn_delete)
+
+            
             Store.e_grid.appendChild(new_item)
         }
     }
 
     static generate_click_event(item_id) {
         return function(event) {
-            StorePopup.render(item_id, Store.items[item_id])
+            // Prevent bubbling
+            if (event.target.classList.contains(Classnames.store_item)) {
+                StorePopup.render(item_id, Store.items[item_id])
+            }
         }    
+    }
+
+    static generate_delete_event(item_id) {
+        return function(event) {
+            console.log(`deleting item with id ${item_id}`)
+            SocketHandler.emit("delete_item", {item_id: item_id, admin_token: Admin.get_token()})
+        }
     }
 
 }
