@@ -67,6 +67,22 @@ body {
     justify-content: center;
 }
 
+.btn-add-item {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    background-image: url("../img/add_button.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.btn-add-item:hover {
+    cursor: pointer;
+}
+
 /* Store popup */
 .store__popup__container {
     position: fixed;
@@ -252,11 +268,11 @@ body {
 
 .store__items__grid__item__btn-delete {
     position: absolute;
-    top: 0.2rem;
+    top: 0.4rem;
     right: 0.2rem;
     width: 2rem;
     height: 2rem;
-    background-image: url("../img/delete_icon_black_2.svg");
+    background-image: url("../img/delete_icon_red_border.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

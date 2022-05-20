@@ -6,18 +6,25 @@ export default class Admin {
 
     static init(socket) {
         Admin._bind_events()
+        SocketHandler.listen("update", (data) => {
+            Admin._set_admin_elements()
+        })
     }
 
     static admin_login(token) {
         Admin.admin_token = token
-        // Make all admin-only elements visible
-        document.querySelectorAll(`.${Classnames.admin.hidden}`).forEach((element, index) => {
-            element.classList.remove(Classnames.admin.hidden)
-        })
+        Admin._set_admin_elements()
     }
 
     static get_token() {
         return Admin.admin_token
+    }
+
+    static _set_admin_elements() {
+        // Make all admin-only elements visible
+        document.querySelectorAll(`.${Classnames.admin.hidden}`).forEach((element, index) => {
+            element.classList.remove(Classnames.admin.hidden)
+        })
     }
 
     static _bind_events() {

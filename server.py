@@ -3,9 +3,10 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 import os
-
+from uuid import uuid4
 from numpy import broadcast
 from src.json_db import JSON_DB as db
+from src.json_db import Item
 from src.admin import Admin
 
 # Globals
@@ -36,6 +37,13 @@ def admin_login(data):
     token = Admin.admin_login(data["password"])
     if token:
         emit("admin_login", {"token": token}, broadcast=False)
+
+@SOCKET.on("add_item")
+def add_item(data):
+    if not Admin.check_token(data["admin_token"]):
+        return
+    db.add_item(Item(str(uuid4()), "new_item_title", "new item description", 5500, False, ["elon_wario.0.jpg"]))
+    emit("update", db.get_items(), broadcast=True)
 
 @SOCKET.on("delete_item")
 def delete_item(data):

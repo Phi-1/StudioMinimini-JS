@@ -1,4 +1,3 @@
-- add confirmation to element delete button
 - save admin token to cookies
 - add main website text to database and request interface
 - make app/cli to add items and change main text

@@ -8,6 +8,8 @@ class Item:
     title: str
     description: str
     price: int #price in cents
+    reserved: bool
+    images: list
 
 class JSON_DB:
     FILEPATH = None
@@ -41,7 +43,7 @@ class JSON_DB:
 
     @staticmethod
     def add_item(item: Item):
-        JSON_DB.DATA["items"][item.id] = {"title": item.title, "description": item.description, "price": item.price}
+        JSON_DB.DATA["items"][item.id] = {"title": item.title, "description": item.description, "price": item.price, "reserved": item.reserved, "images": item.images}
         JSON_DB.save_data()
 
     @staticmethod

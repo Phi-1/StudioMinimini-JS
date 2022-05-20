@@ -77,14 +77,19 @@ export default class Store {
     static e_grid = document.querySelector(`.${Classnames.store_grid}`)
 
     static init() {
+        // Listen for store updates
         SocketHandler.listen("store_items", (data) => {
             Store.update(data["items"])
         })
         SocketHandler.listen("update", (data) => {
             Store.update(data["items"])
         })
+        // Request items from server
         SocketHandler.emit("request_items")
+        // Set up store popup
         StorePopup.init()
+        // Bind add item button
+        document.querySelector(`.${Classnames.store_item_btn_add}`).addEventListener("click", Store.add_item_event)
     }
 
     static update(items) {
@@ -130,9 +135,14 @@ export default class Store {
 
     static generate_delete_event(item_id) {
         return function(event) {
-            console.log(`deleting item with id ${item_id}`)
-            SocketHandler.emit("delete_item", {item_id: item_id, admin_token: Admin.get_token()})
+            if (window.confirm("Are you sure you want to delete this item?")) {
+                SocketHandler.emit("delete_item", {item_id: item_id, admin_token: Admin.get_token()})
+            }  
         }
+    }
+
+    static add_item_event(event) {
+        SocketHandler.emit("add_item", {admin_token: Admin.get_token()})
     }
 
 }
