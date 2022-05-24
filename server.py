@@ -42,7 +42,7 @@ def admin_login(data):
 def add_item(data):
     if not Admin.check_token(data["admin_token"]):
         return
-    db.add_item(Item(str(uuid4()), "new_item_title", "new item description", 5500, False, ["elon_wario.0.jpg"]))
+    print(data["item"]["images"].keys())
     emit("update", db.get_items(), broadcast=True)
 
 @SOCKET.on("delete_item")

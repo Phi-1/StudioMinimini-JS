@@ -31,7 +31,16 @@
 
         <main class="store">
             <div class="store__items">
-                <div class="btn-add-item admin"></div>
+                <div class="btn-add-item admin"></div>`
+                <div class="add-item-container nodisplay">
+                    <form class="add-item-form">
+                        <input type="text" name="title" id="form-title" class="add-item-form-title" autocomplete="off" required>
+                        <textarea class="add-item-form-description" name="description" id="form-description" cols="30" rows="10" autocomplete="off" required></textarea>
+                        <input class="add-item-form-price" type="text" name="price" id="form-price" autocomplete="off" required>
+                        <input class="add-item-form-images" type="file" name="images" id="form-images" multiple required>
+                        <input type="submit" value="submit">
+                    </form>
+                </div>
                 <section class="store__items__grid">
                     
                 </section>

@@ -10,7 +10,15 @@ export default {
     store_grid: "store__items__grid",
     store_item: "store__items__grid__item",
     store_item_btn_delete: "store__items__grid__item__btn-delete",
-    store_item_btn_add: "btn-add-item",
+    store_item_add: {
+        btn_add: "btn-add-item",
+        popup_container: "add-item-container",
+        popup_form: "add-item-form",
+        input_title: "add-item-form-title",
+        input_description: "add-item-form-description",
+        input_price: "add-item-form-price",
+        input_images: "add-item-form-images"
+    },
     store_popup: {
         container: "store__popup__container",
         window: "store__items__popup",

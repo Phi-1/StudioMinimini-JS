@@ -83,6 +83,12 @@ body {
     cursor: pointer;
 }
 
+.add-item-container {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 /* Store popup */
 .store__popup__container {
     position: fixed;

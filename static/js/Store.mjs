@@ -89,7 +89,11 @@ export default class Store {
         // Set up store popup
         StorePopup.init()
         // Bind add item button
-        document.querySelector(`.${Classnames.store_item_btn_add}`).addEventListener("click", Store.add_item_event)
+        document.querySelector(`.${Classnames.store_item_add.btn_add}`).addEventListener("click", Store.add_item_button_event)
+        // Bind add item popup close event
+        document.querySelector(`.${Classnames.store_item_add.popup_container}`).addEventListener("click", Store.add_item_popup_event)
+        // Bind add item form submit event
+        document.querySelector(`.${Classnames.store_item_add.popup_form}`).addEventListener("submit", Store.add_item_form_event)
     }
 
     static update(items) {
@@ -141,8 +145,28 @@ export default class Store {
         }
     }
 
-    static add_item_event(event) {
-        SocketHandler.emit("add_item", {admin_token: Admin.get_token()})
+    static add_item_button_event(event) {
+        document.querySelector(`.${Classnames.store_item_add.popup_container}`).classList.toggle(Classnames.no_display)
+    }
+
+    static add_item_popup_event(event) {
+        const popup = document.querySelector(`.${Classnames.store_item_add.popup_container}`)
+        if (event.target != popup) { return }
+        popup.classList.toggle(Classnames.no_display)
+    }
+
+    static async add_item_form_event(event) {
+        event.preventDefault()
+        const title = document.querySelector(`.${Classnames.store_item_add.input_title}`).value
+        const description = document.querySelector(`.${Classnames.store_item_add.input_description}`).value
+        const price = document.querySelector(`.${Classnames.store_item_add.input_price}`).value
+        const image_files = document.querySelector(`.${Classnames.store_item_add.input_images}`).files
+        const images = {}
+        for (let i = 0; i < image_files.length; i++) {
+            const image = image_files[i]
+            images[image.name] = await image.arrayBuffer()
+        }
+        SocketHandler.emit("add_item", {admin_token: Admin.get_token(), item: {title, description, price, images}})
     }
 
 }
