@@ -147,6 +147,7 @@ export default class Store {
 
     static add_item_button_event(event) {
         document.querySelector(`.${Classnames.store_item_add.popup_container}`).classList.toggle(Classnames.no_display)
+        document.querySelector(`.${Classnames.store_item_add.input_title}`).focus()
     }
 
     static add_item_popup_event(event) {
@@ -167,6 +168,8 @@ export default class Store {
             images[image.name] = await image.arrayBuffer()
         }
         SocketHandler.emit("add_item", {admin_token: Admin.get_token(), item: {title, description, price, images}})
+        // Close form
+        document.querySelector(`.${Classnames.store_item_add.popup_container}`).classList.toggle(Classnames.no_display)
     }
 
 }
