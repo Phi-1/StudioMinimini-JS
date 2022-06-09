@@ -1,4 +1,5 @@
 - save admin token to cookies
+- delete images from img folder on item deletion
 - add main website text to database and request interface
 - make app/cli to add items and change main text
 - MAKE SURE post app checks if uploaded image with the same name already exists in folder

@@ -1,0 +1,27 @@
+{
+  "name": "studiominimini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phi-1/StudioMinimini.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phi-1/StudioMinimini/issues"
+  },
+  "homepage": "https://github.com/Phi-1/StudioMinimini#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1"
+  }
+}
