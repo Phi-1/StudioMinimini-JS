@@ -5,7 +5,7 @@ const json_db = (() => {
     let db_data = { items: {} }
     let db_path = ""
 
-    async function save_data() {
+    async function save_db_data() {
         await files.write(db_path, JSON.stringify(db_data))
     }
 
@@ -21,22 +21,34 @@ const json_db = (() => {
                     console.error(`[DATABASE ERROR] Database file was read but no data was received, check integrity of file ${db_path}`)
                 }
             } else {
-                save_data()
+                save_db_data()
             }
         },
-
         get_items: () => {
             return db_data
         },
-
         add_item: async (id, title, description, price, reserved, images) => {
             db_data.items[id] = {title, description, price, reserved, images}
-            save_data()
+            save_db_data()
         },
-
-        delete_item: async (id) => {
-            delete db_data.items[id]
-            save_data()
+        delete_item: async (item_id) => {
+            if (item_id in db_data.items) {
+                delete db_data.items[item_id]
+                save_db_data()
+            }
+        },
+        set_reserved: async (item_id, reserved) => {
+            if (!item_id in db_data.items) {
+                return
+            }
+            db_data.items[item_id]["reserved"] = reserved
+            save_db_data()
+        },
+        is_reserved: async (item_id) => {
+            if (!item_id in db_data.items) {
+                return
+            }
+            return db_data.items[item_id]["reserved"]
         }
     }
 })()

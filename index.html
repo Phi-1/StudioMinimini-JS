@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="static/img/minimini-icon3.png">
+    <link rel="stylesheet" href="static/css/index.css">
+    <script type="module" src="static/js/Classnames.mjs" defer></script>
+    <script type="module" src="static/js/SocketHandler.mjs" defer></script>
+    <script type="module" src="static/js/Admin.mjs" defer></script>
+    <script type="module" src="static/js/Store.mjs" defer></script>
+    <script type="module" src="static/js/index.mjs" defer></script>static/
+    <title>STUDIOMINIMINI</title>
+</head>
+<body>
+    <div class="page">
+
+        <header>
+
+            <div class="header__title">
+                <span class="header__title__text">Webshop STUDIOMINIMINI</span>
+            </div>
+            
+        </header>
+
+        <main class="store">
+            <div class="store__items">
+                <div class="btn-add-item admin"></div>`
+                <div class="add-item-container nodisplay">
+                    <form class="add-item-form">
+                        <label for="form-title">Title: </label>
+                        <input type="text" name="title" id="form-title" class="add-item-form-title" autocomplete="off" required>
+                        <label for="form-description">Description: </label>
+                        <textarea class="add-item-form-description" name="description" id="form-description" cols="50" rows="10" autocomplete="off" required></textarea>
+                        <label for="form-price">Price: </label>
+                        <input class="add-item-form-price" type="text" name="price" id="form-price" autocomplete="off" required>
+                        <label for="form-images">Images: </label>
+                        <input class="add-item-form-images" type="file" name="images" id="form-images" multiple required>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <section class="store__items__grid">
+                    
+                </section>
+                <div class="store__popup__container nodisplay">
+                    <div class="store__items__popup">
+                        <div class="btn-fullscreen"></div>
+                        <div class="store__items__popup__arrow-left"></div>
+                        <div class="store__items__popup__arrow-right"></div>
+                        <section class="store__items__popup__body">
+                            <h1 class="store__items__popup__title">Product title</h1>
+                            <div class="store__items__popup__btn-close">X</div>
+                            <p class="store__items__popup__description">Product description</p>
+                            <span class="store__items__popup__disclaimer">Please note that these items are limited and are sold on a first-come, first-serve basis.</span>
+                            <span class="store__items__popup__pricetag">&euro;55,-</span>     
+                            <form action="" class="store__items__popup__form">
+                                <input type="text" name="email" id="input-email" placeholder="Your email address" autocomplete="off" required>
+                                <input type="submit" value="Reserve" class="store__items__popup__btn-reserve">
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <section class="store__description">
+                <p class="store__description__text">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente illo omnis qui.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <div class="btn-admin-login"></div>
+        <div class="admin-login nodisplay">
+            <form class="admin-form">
+                <input type="password" name="admin-password" class="admin-form-password" required autocomplete="off">
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

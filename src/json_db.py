@@ -21,7 +21,8 @@ class JSON_DB:
                 "title": "test item",
                 "description": "this is a test",
                 "price": 34_01,
-                "images": ["testitem.png"]
+                "images": ["testitem.png"],
+                "reserved": False
             }
         }
     }
@@ -54,5 +55,19 @@ class JSON_DB:
         JSON_DB.save_data()
 
     @staticmethod
+    def set_reserved(item_id, status: bool):
+        if not item_id in JSON_DB.DATA["items"]:
+            return
+        JSON_DB.DATA["items"][item_id]["reserved"] = status
+        JSON_DB.save_data()
+
+    @staticmethod
     def get_items():
         return JSON_DB.DATA
+
+    @staticmethod
+    def is_reserved(item_id):
+        if not item_id in JSON_DB.DATA["items"]:
+            return
+        return JSON_DB.DATA["items"][item_id]["reserved"]
+

@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+import mailjet_rest as mailjet
 from dotenv import load_dotenv
 import os
 from uuid import uuid4
@@ -11,6 +12,7 @@ import src.util as util
 
 # Globals
 SERVER = Flask(__name__)
+MAIL: mailjet.Client = None
 SOCKET = SocketIO(SERVER)
 CORS(SERVER)
 
@@ -58,6 +60,24 @@ def delete_item(data):
     emit("update", db.get_items(), broadcast=True)
 
 
+@SOCKET.on("reserve_item")
+def reserve_item(data):
+    item_id = data["item_id"]
+    if not item_id:
+        return
+    if db.is_reserved(item_id):
+        emit("reservation_failure", broadcast=False)
+        return
+    db.set_reserved(item_id, True)
+    mail_success = util.send_reservation_notification(MAIL)
+    if not mail_success:
+        emit("reservation_failure", broadcast=False)
+        db.set_reserved(item_id, False)
+        return
+    emit("reservation_success", broadcast=False)
+    emit("update", db.get_items(), broadcast=True)
+
+
 # Main
 if __name__ == "__main__":
     load_dotenv()
@@ -67,5 +87,10 @@ if __name__ == "__main__":
 
     db.connect(db_path)
     Admin.set_password(os.environ.get("ADMIN_PASSWORD"))
+
+    # Configure mailjet
+    mail_api_key = os.environ.get("MAIL_API_KEY")
+    mail_api_secret = os.environ.get("MAIL_API_SECRET")
+    MAIL = mailjet.Client(auth=(mail_api_key, mail_api_secret), version="v3.1")
 
     SOCKET.run(SERVER, host="0.0.0.0", port=server_port, debug=True)

@@ -1,4 +1,5 @@
 from uuid import uuid4
+import mailjet_rest as mailjet
 import os
 import re
 
@@ -42,3 +43,26 @@ def format_price(price_str: str) -> int:
         price_str_final = price_str + "00"
 
     return int(price_str_final)
+
+
+def send_reservation_notification(mailjet_client: mailjet.Client) -> bool:
+    # email = {
+    #     'Messages': [
+    #             {
+    #                 "From": {
+    #                     "Email": "studiominimini.notifications@gmail.com",
+    #                     "Name": "STUDIOMINIMINI Notifications"
+    #                 },
+    #                 "To": [
+    #                     {
+    #                         "Email": "dterberg98@gmail.com",
+    #                         "Name": "Dick"
+    #                     }
+    #                 ],
+    #                 "Subject": "Item Reservation",
+    #                 "TextPart": "Item reserved by someone"
+    #             }
+    #         ]
+    #     }
+    # result = mailjet_client.send.create(data=email)
+    return True

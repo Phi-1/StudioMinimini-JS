@@ -1,21 +1,23 @@
-import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
 
-export default class SocketHandler {
-    static socket = null
 
-    static init() {
-        SocketHandler.socket = io()
-    }
+export default (() => {
 
-    static emit(event, data = undefined) {
-        if (data) {
-            SocketHandler.socket.emit(event, data)
-            return
+    let socket = undefined
+
+    return {
+        init: () => {
+            socket = io()
+        },
+        emit: (event, data = undefined) => {
+            if (data) {
+                socket.emit(event, data)
+                return
+            }
+            socket.emit(event)
+        },
+        listen: (event, callback) => {
+            socket.on(event, callback)
         }
-        SocketHandler.socket.emit(event)
     }
-
-    static listen(event, callback) {
-        SocketHandler.socket.on(event, callback)
-    }
-}
+})()

@@ -84,9 +84,28 @@ body {
 }
 
 .add-item-container {
+    z-index: 1;
     position: fixed;
     inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.add-item-form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #111;
+    color: #EEE;
+    font-family: "EB Garamond", serif;
+    font-size: 1.2rem;
+    border: 1px solid white;
+}
+
+.add-item-form > * {
+    margin: 0.2rem 0;
 }
 
 /* Store popup */

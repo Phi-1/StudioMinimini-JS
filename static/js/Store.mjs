@@ -18,6 +18,7 @@ class StorePopup {
     static e_arrow_left = document.querySelector(`.${Classnames.store_popup.arrow_left}`)
     static e_arrow_right = document.querySelector(`.${Classnames.store_popup.arrow_right}`)
 
+    static current_item_id = null
     static current_item_images = []
     static image_index = 0
 
@@ -31,9 +32,15 @@ class StorePopup {
         StorePopup.e_arrow_left.addEventListener("click", StorePopup.arrow_left_event)
         StorePopup.e_arrow_right.addEventListener("click", StorePopup.arrow_right_event)
         StorePopup.e_container.addEventListener("click", StorePopup.container_event)
+        // reserve button event
+        SocketHandler.listen("reservation_success", () => console.log("reservation success"))
+        SocketHandler.listen("reservation_failure", () => console.log("reservation failure"))
+        StorePopup.e_button_reserve.addEventListener("click", StorePopup.reserve_item_event)
     }
 
     static render(item_id, item_props) {
+        // set current item
+        StorePopup.current_item_id = item_id
         // save item images
         StorePopup.current_item_images = item_props["images"]
         // set element content
@@ -46,11 +53,13 @@ class StorePopup {
     }
 
     static close_button_event(event) {
+        StorePopup.current_item_id = null
         StorePopup.e_container.classList.toggle(Classnames.no_display)
     }
 
     static container_event(event) {
         if (event.target === StorePopup.e_container) {
+            StorePopup.current_item_id = null
             StorePopup.e_container.classList.toggle(Classnames.no_display)
         }
     }
@@ -69,6 +78,11 @@ class StorePopup {
         if (StorePopup.image_index == StorePopup.current_item_images.length - 1) { StorePopup.image_index = 0 }
         else { StorePopup.image_index++ }
         StorePopup.e_popup.style["background-image"] = `url(static/img/store_items/${StorePopup.current_item_images[StorePopup.image_index]})`
+    }
+
+    static reserve_item_event(event) {
+        if (!StorePopup.current_item_id) { return }
+        SocketHandler.emit("reserve_item", {item_id: StorePopup.current_item_id})
     }
 }
 
@@ -163,8 +177,13 @@ export default class Store {
         const price = document.querySelector(`.${Classnames.store_item_add.input_price}`).value
         const image_files = document.querySelector(`.${Classnames.store_item_add.input_images}`).files
         const images = {}
+        // To ensure that the images load properly each needs to be less than 4MB
         for (let i = 0; i < image_files.length; i++) {
             const image = image_files[i]
+            if (image.size > 4194304) {
+                alert("Please limit each of your files to 4MB and try again")
+                return
+            }
             images[image.name] = await image.arrayBuffer()
         }
         SocketHandler.emit("add_item", {admin_token: Admin.get_token(), item: {title, description, price, images}})

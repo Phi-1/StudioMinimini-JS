@@ -1,3 +1,4 @@
+- reset popup window with each open (item_index, info display)
 - save admin token to cookies
 - delete images from img folder on item deletion
 - add main website text to database and request interface
