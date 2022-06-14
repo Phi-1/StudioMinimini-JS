@@ -44,7 +44,7 @@ class StorePopup {
         // save item images
         StorePopup.current_item_images = item_props["images"]
         // set element content
-        StorePopup.e_popup.style["background-image"] = `url(static/img/store_items/${item_props["images"][0]})`
+        StorePopup.e_popup.style["background-image"] = `url(img/store_items/${item_props["images"][0]})`
         StorePopup.e_title.innerText = item_props["title"]
         StorePopup.e_description.innerText = item_props["description"]
         const price_string = String(item_props["price"]).slice(0, -2) + "," + String(item_props["price"]).slice(-2)
@@ -71,13 +71,13 @@ class StorePopup {
     static arrow_left_event(event) {
         if (StorePopup.image_index == 0) { StorePopup.image_index = StorePopup.current_item_images.length - 1 }
         else { StorePopup.image_index-- }
-        StorePopup.e_popup.style["background-image"] = `url(static/img/store_items/${StorePopup.current_item_images[StorePopup.image_index]})`
+        StorePopup.e_popup.style["background-image"] = `url(img/store_items/${StorePopup.current_item_images[StorePopup.image_index]})`
     }
 
     static arrow_right_event(event) {
         if (StorePopup.image_index == StorePopup.current_item_images.length - 1) { StorePopup.image_index = 0 }
         else { StorePopup.image_index++ }
-        StorePopup.e_popup.style["background-image"] = `url(static/img/store_items/${StorePopup.current_item_images[StorePopup.image_index]})`
+        StorePopup.e_popup.style["background-image"] = `url(img/store_items/${StorePopup.current_item_images[StorePopup.image_index]})`
     }
 
     static reserve_item_event(event) {
@@ -125,7 +125,7 @@ export default class Store {
             const new_item = document.createElement("div")
             new_item.classList.add(Classnames.store_item)
             // set image
-            new_item.style["background-image"] = `url(static/img/store_items/${Store.items[item_id]["images"][0]})`
+            new_item.style["background-image"] = `url(img/store_items/${Store.items[item_id]["images"][0]})`
             // add click eventlistener
             if (!Store.items[item_id]["reserved"]) {
                 new_item.addEventListener("click", Store.generate_click_event(item_id))

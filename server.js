@@ -14,12 +14,12 @@ const io = require("socket.io")(http, {
 })
 
 server.use(cors())
-server.use(express.static("./"))
+server.use(express.static("static"))
 
 
 // Server routes
 server.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html")
+    res.sendFile(__dirname + "/static/index.html")
 })
 
 // Socket events
@@ -42,7 +42,7 @@ async function on_add_item(socket, data) {
         const image_id = uuidv4()
         const file_extension = files.get_file_ext(image_name)
         await files.write(`${__dirname}/${process.env["STORE_IMAGES_PATH"]}/${image_id}.${file_extension}`, data["item"]["images"][image_name])
-        image_names.push(image_id)
+        image_names.push(`${image_id}.${file_extension}`)
     }
     const item_price = util.format_price(String(item["price"]))
     db.add_item(uuidv4(), item["title"], item["description"], item_price, false, image_names)
@@ -51,6 +51,11 @@ async function on_add_item(socket, data) {
 
 function on_delete_item(socket, data) {
     if (!admin.check_token(socket.id, data["admin_token"])) return
+    // Delete image files
+    const images = db.get_items()["items"][data["item_id"]]["images"]
+    images.forEach(async (image) => {
+        await files.delete(`${__dirname}/${process.env["STORE_IMAGES_PATH"]}/${image}`)
+    })
     db.delete_item(data["item_id"])
     io.emit("update", db.get_items())
 }

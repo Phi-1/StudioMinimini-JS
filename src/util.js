@@ -35,6 +35,17 @@ const files = (() => {
                 })
             })
         },
+        delete: (filepath) => {
+            return new Promise((resolve, reject) => {
+                fs.unlink(filepath, (err) => {
+                    if (err) {
+                        console.error(err)
+                        return resolve(false)
+                    }
+                    return resolve(true)
+                })
+            })
+        },
         get_file_ext: (filename) => {
             const split = filename.split(".")
             return split[split.length - 1]
@@ -48,9 +59,9 @@ const util = (() => {
         format_price: (price_str) => {
             // Returns an integer of the price in cents
             // Get rid of currency signs and random characters, but keep decimal point or comma
-            price_str = price_str.replace("[^\d\.,]", "")
+            price_str = price_str.replace(/[^\d\.,]/, "")
             // If there is a comma or decimal point, treat price differently based on number of digits after decimal point
-            const decimal_split = price_str.split("[\.,]+")
+            const decimal_split = price_str.split(/[\.,]+/)
             let price_str_final = ""
             if (decimal_split.length > 1) {
                 // Use last chunk after a comma or decimal point as cents
