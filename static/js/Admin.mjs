@@ -6,9 +6,6 @@ export default class Admin {
 
     static init(socket) {
         Admin._bind_events()
-        SocketHandler.listen("update", (data) => {
-            Admin._set_admin_elements()
-        })
     }
 
     static admin_login(token) {
@@ -20,8 +17,15 @@ export default class Admin {
         return Admin.admin_token
     }
 
+    static on_store_update() {
+        if (Admin.admin_token) {
+            Admin._set_admin_elements()
+        }
+    }
+
     static _set_admin_elements() {
         // Make all admin-only elements visible
+        console.log("admin removing hidden")
         document.querySelectorAll(`.${Classnames.admin.hidden}`).forEach((element, index) => {
             element.classList.remove(Classnames.admin.hidden)
         })

@@ -97,6 +97,7 @@ export default class Store {
         })
         SocketHandler.listen("update", (data) => {
             Store.update(data["items"])
+            Admin.on_store_update()
         })
         // Request items from server
         SocketHandler.emit("request_items")
@@ -180,8 +181,8 @@ export default class Store {
         // To ensure that the images load properly each needs to be less than 4MB
         for (let i = 0; i < image_files.length; i++) {
             const image = image_files[i]
-            if (image.size > 4194304) {
-                alert("Please limit each of your files to 4MB and try again")
+            if (image.size > 8388608) {
+                alert("Please limit each of your files to 8MB and try again")
                 return
             }
             images[image.name] = await image.arrayBuffer()

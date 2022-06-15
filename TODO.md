@@ -1,5 +1,4 @@
 - reset popup window with each open (item_index, info display)
-- fix when an admin adds an item, all users see admin buttons
 - frontend price formatting does not show a 0 before the comma if the price is lower than 1 euro
 - save admin token to cookies
 - add main website text to database and request interface

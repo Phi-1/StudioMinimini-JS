@@ -281,6 +281,7 @@ body {
     background-color: #7a6299;
     background-image: url("../img/banner-blue50.jpg");
     background-size: cover;
+    background-position: center;
     opacity: 1;
     animation: fade-in 900ms linear;
     transition: transform 100ms ease-out;

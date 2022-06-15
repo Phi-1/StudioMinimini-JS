@@ -10,7 +10,7 @@ const express = require("express")
 const server = express()
 const http = require("http").Server(server)
 const io = require("socket.io")(http, {
-    maxHttpSize: process.env["SOCKET_DATA_MAX_SIZE"]
+    maxHttpBufferSize: process.env["SOCKET_MAX_DATA_SIZE"]
 })
 
 server.use(cors())
