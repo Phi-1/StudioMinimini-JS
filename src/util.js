@@ -1,4 +1,5 @@
 const fs = require("fs")
+const Mailjet = require("node-mailjet")
 
 const files = (() => {
 
@@ -86,5 +87,45 @@ const util = (() => {
     }
 })()
 
+const mail = (() => {
+    
+    let mailjet = undefined
 
-module.exports = { files, util }
+    return {
+        init: () => {
+            mailjet = new Mailjet({
+                apiKey: process.env["MAIL_API_KEY"],
+                apiSecret: process.env["MAIL_API_SECRET"]
+            })
+        },
+        send_reservation_notification: () => {
+            const request = mailjet.post("send", {version: "v3.1"}).request({
+                Messages: [
+                    {
+                        From: {
+                            Email: "studiominimini.notifications@gmail.com",
+                            Name: "STUDIOMINIMINI Notifications"
+                        },
+                        To: [
+                            {
+                                Email: "dterberg98@gmail.com",
+                                Name: "my dude"
+                            }
+                        ],
+                        Subject: "Here's a notification",
+                        TextPart: "Hey",
+                        HTMLPart: "<ul><li>hoi</li></ul>"
+                    }
+                ]
+            })
+            request.then((result) => {
+                console.log(result.body)
+            }).catch((err) => {
+                console.log(err.statusCode)
+            })
+        }
+    }
+})()
+
+
+module.exports = { files, util, mail }

@@ -2,7 +2,7 @@ const { files } = require("./util")
 
 const json_db = (() => {
 
-    let db_data = { items: {} }
+    let db_data = { items: {}, store_text: "" }
     let db_path = ""
 
     async function save_db_data() {
@@ -24,7 +24,7 @@ const json_db = (() => {
                 save_db_data()
             }
         },
-        get_items: () => {
+        get_data: () => {
             return db_data
         },
         add_item: async (id, title, description, price, reserved, images) => {
@@ -44,11 +44,19 @@ const json_db = (() => {
             db_data.items[item_id]["reserved"] = reserved
             save_db_data()
         },
-        is_reserved: async (item_id) => {
+        is_reserved: (item_id) => {
             if (!item_id in db_data.items) {
                 return
             }
             return db_data.items[item_id]["reserved"]
+        },
+        set_store_text: (text) => {
+            if (!typeof text == "string") return
+            db_data.store_text = text
+            save_db_data()
+        },
+        get_store_text: () => {
+            return db_data.store_text
         }
     }
 })()

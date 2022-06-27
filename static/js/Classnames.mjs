@@ -9,6 +9,7 @@ export default {
     },
     store_grid: "store__items__grid",
     store_item: "store__items__grid__item",
+    store_item_reserved: "reserved",
     store_item_btn_delete: "store__items__grid__item__btn-delete",
     store_item_add: {
         btn_add: "btn-add-item",
@@ -32,5 +33,12 @@ export default {
         button_fullscreen: "btn-fullscreen",
         arrow_left: "store__items__popup__arrow-left",
         arrow_right: "store__items__popup__arrow-right"
+    },
+    store_description: {
+        text: "store__description__text",
+        btn_edit: "btn-edit-store-text",
+        popup: "edit-store-text",
+        form: "store-text-form",
+        textarea: "new-store-text"
     }
 }

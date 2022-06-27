@@ -1,5 +1,4 @@
-- reset popup window with each open (item_index, info display)
-- frontend price formatting does not show a 0 before the comma if the price is lower than 1 euro
-- save admin token to cookies
+- fix not being able to delete items when they're reserved (reserved element goes on top of the delete button)
 - add main website text to database and request interface
-- implement reserve functionality
+- implement reserve functionality on frontend
+- polish mobile site

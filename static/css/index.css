@@ -287,6 +287,23 @@ body {
     transition: transform 100ms ease-out;
 }
 
+.reserved::after {
+    content: "reserved";
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    background-image: url("../img/reserved_bg.png");
+    background-size: cover;
+    color: #FFF;
+    font-size: 2rem;
+    font-family: "EB-Garamond", serif;
+    letter-spacing: 2px;
+    text-shadow: 0 0 4px black;
+    text-transform: capitalize;
+}
+
 .store__items__grid__item:hover, .store__items__grid__item:focus {
     transform: scale(1.02);
     cursor: pointer;
@@ -306,8 +323,41 @@ body {
 
 /* Store text */
 .store__description {
+    position: relative;
     background-color: #EEE;
     box-shadow: 0 0 4px 0 #000 inset;
+}
+
+.btn-edit-store-text {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    background-image: url("../img/edit_icon.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.btn-edit-store-text:hover {
+    cursor: pointer;
+}
+
+.edit-store-text {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.edit-store-text > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .store__description__text {

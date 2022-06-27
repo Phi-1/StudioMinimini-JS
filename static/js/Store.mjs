@@ -47,19 +47,21 @@ class StorePopup {
         StorePopup.e_popup.style["background-image"] = `url(img/store_items/${item_props["images"][0]})`
         StorePopup.e_title.innerText = item_props["title"]
         StorePopup.e_description.innerText = item_props["description"]
-        const price_string = String(item_props["price"]).slice(0, -2) + "," + String(item_props["price"]).slice(-2)
+        const price_string = (String(item_props["price"]).slice(0, -2).length > 0 ? String(item_props["price"]).slice(0, -2) : "0") + "," + String(item_props["price"]).slice(-2)
         StorePopup.e_pricetag.innerHTML = `&euro; ${price_string}`
         StorePopup.e_container.classList.toggle(Classnames.no_display)
     }
 
     static close_button_event(event) {
         StorePopup.current_item_id = null
+        StorePopup.image_index = 0
         StorePopup.e_container.classList.toggle(Classnames.no_display)
     }
 
     static container_event(event) {
         if (event.target === StorePopup.e_container) {
             StorePopup.current_item_id = null
+            StorePopup.image_index = 0
             StorePopup.e_container.classList.toggle(Classnames.no_display)
         }
     }
@@ -81,8 +83,17 @@ class StorePopup {
     }
 
     static reserve_item_event(event) {
+        event.preventDefault()
         if (!StorePopup.current_item_id) { return }
-        SocketHandler.emit("reserve_item", {item_id: StorePopup.current_item_id})
+        const customer_email = document.getElementById("input-email").value
+        console.log(customer_email)
+        // Check if somewhat valid email
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(customer_email)) {
+            alert("Please enter a valid email address")
+            return
+        }
+
+        SocketHandler.emit("reserve_item", {item_id: StorePopup.current_item_id, customer_email})
     }
 }
 
@@ -92,15 +103,15 @@ export default class Store {
 
     static init() {
         // Listen for store updates
-        SocketHandler.listen("store_items", (data) => {
-            Store.update(data["items"])
+        SocketHandler.listen("store_data", (data) => {
+            Store.update(data["items"], data["store_text"])
         })
         SocketHandler.listen("update", (data) => {
-            Store.update(data["items"])
+            Store.update(data["items"], data["store_text"])
             Admin.on_store_update()
         })
         // Request items from server
-        SocketHandler.emit("request_items")
+        SocketHandler.emit("request_store_data")
         // Set up store popup
         StorePopup.init()
         // Bind add item button
@@ -109,10 +120,17 @@ export default class Store {
         document.querySelector(`.${Classnames.store_item_add.popup_container}`).addEventListener("click", Store.add_item_popup_event)
         // Bind add item form submit event
         document.querySelector(`.${Classnames.store_item_add.popup_form}`).addEventListener("submit", Store.add_item_form_event)
+        // Bind edit store text button
+        document.querySelector(`.${Classnames.store_description.btn_edit}`).addEventListener("click", Store.edit_store_text_event)
+        // Bind edit store text popup close event
+        document.querySelector(`.${Classnames.store_description.popup}`).addEventListener("click", Store.edit_store_text_popup_event)
+        // Bind edit store text form event
+        document.querySelector(`.${Classnames.store_description.form}`).addEventListener("submit", Store.edit_store_text_form_event)
     }
 
-    static update(items) {
+    static update(items, store_text) {
         Store.items = items
+        document.querySelector(`.${Classnames.store_description.text}`).innerHTML = store_text
         Store.render()
     }
 
@@ -130,6 +148,8 @@ export default class Store {
             // add click eventlistener
             if (!Store.items[item_id]["reserved"]) {
                 new_item.addEventListener("click", Store.generate_click_event(item_id))
+            } else {
+                new_item.classList.add(Classnames.store_item_reserved)
             }
             // add admin-only delete button
             const btn_delete = document.createElement("div")
@@ -190,6 +210,25 @@ export default class Store {
         SocketHandler.emit("add_item", {admin_token: Admin.get_token(), item: {title, description, price, images}})
         // Close form
         document.querySelector(`.${Classnames.store_item_add.popup_container}`).classList.toggle(Classnames.no_display)
+    }
+
+    static edit_store_text_event(event) {
+        document.querySelector(`.${Classnames.store_description.popup}`).classList.toggle(Classnames.no_display)
+        document.querySelector(`.${Classnames.store_description.textarea}`).focus()
+    }
+
+    static edit_store_text_popup_event(event) {
+        const popup = document.querySelector(`.${Classnames.store_description.popup}`)
+        if (event.target != popup) return
+        popup.classList.toggle(Classnames.no_display)
+    }
+
+    static edit_store_text_form_event(event) {
+        event.preventDefault()
+        const new_store_text = document.querySelector(`.${Classnames.store_description.textarea}`).value
+        if (!new_store_text) return
+        SocketHandler.emit("set_store_text", { store_text: new_store_text })
+        document.querySelector(`.${Classnames.store_description.popup}`).classList.toggle(Classnames.no_display)
     }
 
 }
