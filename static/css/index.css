@@ -84,7 +84,7 @@ body {
 }
 
 .add-item-container {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     inset: 0;
     display: flex;
@@ -110,13 +110,14 @@ body {
 
 /* Store popup */
 .store__popup__container {
+    z-index: 2;
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .store__items__popup {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     inset: 10%;
     display: grid;
@@ -310,12 +311,26 @@ body {
 }
 
 .store__items__grid__item__btn-delete {
+    z-index: 1;
     position: absolute;
     top: 0.4rem;
     right: 0.2rem;
     width: 2rem;
     height: 2rem;
     background-image: url("../img/delete_icon_red_border.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.store__items__grid__item__btn-reset {
+    z-index: 1;
+    position: absolute;
+    bottom: 0.4rem;
+    right: 0.2rem;
+    width: 2rem;
+    height: 2rem;
+    background-image: url("../img/reset_icon.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

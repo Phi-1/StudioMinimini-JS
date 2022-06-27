@@ -1,4 +1,3 @@
-- fix not being able to delete items when they're reserved (reserved element goes on top of the delete button)
-- add main website text to database and request interface
-- implement reserve functionality on frontend
+- admin login button does not work on mobile
+- add email api error handling
 - polish mobile site

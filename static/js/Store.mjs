@@ -157,7 +157,12 @@ export default class Store {
             btn_delete.classList.add(Classnames.admin.hidden)
             btn_delete.addEventListener("click", Store.generate_delete_event(item_id))
             new_item.appendChild(btn_delete)
-
+            // add admin-only reset button
+            const btn_reset = document.createElement("div")
+            btn_reset.classList.add(Classnames.store_item_btn_reset)
+            btn_reset.classList.add(Classnames.admin.hidden)
+            btn_reset.addEventListener("click", Store.generate_reset_event(item_id))
+            new_item.appendChild(btn_reset)
             
             Store.e_grid.appendChild(new_item)
         }
@@ -176,6 +181,14 @@ export default class Store {
         return function(event) {
             if (window.confirm("Are you sure you want to delete this item?")) {
                 SocketHandler.emit("delete_item", {item_id: item_id, admin_token: Admin.get_token()})
+            }  
+        }
+    }
+
+    static generate_reset_event(item_id) {
+        return function(event) {
+            if (window.confirm("Are you sure you want to reset this item?")) {
+                SocketHandler.emit("reset_item", {item_id: item_id, admin_token: Admin.get_token()})
             }  
         }
     }
@@ -227,7 +240,7 @@ export default class Store {
         event.preventDefault()
         const new_store_text = document.querySelector(`.${Classnames.store_description.textarea}`).value
         if (!new_store_text) return
-        SocketHandler.emit("set_store_text", { store_text: new_store_text })
+        SocketHandler.emit("set_store_text", { admin_token: Admin.get_token(), store_text: new_store_text })
         document.querySelector(`.${Classnames.store_description.popup}`).classList.toggle(Classnames.no_display)
     }
 

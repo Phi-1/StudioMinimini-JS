@@ -68,12 +68,20 @@ function on_reserve_item(socket, data) {
         return
     }
     db.set_reserved(item_id, true)
-    mail.send_reservation_notification()
+    const item = db.get_data().items[item_id]
+    mail.send_reservation_notification(item["title"], item["price"], data["customer_email"])
     io.emit("update", db.get_data())
 }
 
 function on_set_store_text(socket, data) {
+    if (!admin.check_token(socket.id, data["admin_token"])) return
     db.set_store_text(data["store_text"])
+    io.emit("update", db.get_data())
+}
+
+function on_reset_item(socket, data) {
+    if (!admin.check_token(socket.id, data["admin_token"])) return
+    db.set_reserved(data["item_id"], false)
     io.emit("update", db.get_data())
 }
 
@@ -85,6 +93,7 @@ io.on("connection", (socket) => {
     socket.on("delete_item", (data) => { on_delete_item(socket, data) })
     socket.on("reserve_item", (data) => { on_reserve_item(socket, data) })
     socket.on("set_store_text", (data) => { on_set_store_text(socket, data) })
+    socket.on("reset_item", (data) => { on_reset_item(socket, data) })
 
     socket.on("disconnect", () => {
         console.log("user disconnected")

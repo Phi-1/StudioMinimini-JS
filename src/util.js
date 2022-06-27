@@ -98,23 +98,23 @@ const mail = (() => {
                 apiSecret: process.env["MAIL_API_SECRET"]
             })
         },
-        send_reservation_notification: () => {
+        send_reservation_notification: (item_name, item_price, customer_email) => {
             const request = mailjet.post("send", {version: "v3.1"}).request({
                 Messages: [
                     {
                         From: {
-                            Email: "studiominimini.notifications@gmail.com",
+                            Email: process.env["NOTIFICATION_SENDER_ADDRESS"],
                             Name: "STUDIOMINIMINI Notifications"
                         },
                         To: [
                             {
-                                Email: "dterberg98@gmail.com",
-                                Name: "my dude"
+                                Email: process.env["NOTIFICATION_RECIPIENT_ADDRESS"],
+                                Name: "STUDIOMINIMINI HQ"
                             }
                         ],
-                        Subject: "Here's a notification",
-                        TextPart: "Hey",
-                        HTMLPart: "<ul><li>hoi</li></ul>"
+                        Subject: "STUDIOMINIMINI Item Reservation",
+                        TextPart: "",
+                        HTMLPart: `Item name: ${item_name}<br>Item price (in cents): ${item_price}<br>Reserved by: ${customer_email}`
                     }
                 ]
             })

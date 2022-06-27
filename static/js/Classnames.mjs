@@ -11,6 +11,7 @@ export default {
     store_item: "store__items__grid__item",
     store_item_reserved: "reserved",
     store_item_btn_delete: "store__items__grid__item__btn-delete",
+    store_item_btn_reset: "store__items__grid__item__btn-reset",
     store_item_add: {
         btn_add: "btn-add-item",
         popup_container: "add-item-container",
