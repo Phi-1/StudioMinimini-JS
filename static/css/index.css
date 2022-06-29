@@ -360,6 +360,7 @@ body {
 }
 
 .edit-store-text {
+    z-index: 2;
     position: fixed;
     inset: 0;
     display: flex;
@@ -369,6 +370,7 @@ body {
 }
 
 .edit-store-text > form {
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;

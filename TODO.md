@@ -1,3 +1,2 @@
-- admin login button does not work on mobile
 - add email api error handling
 - polish mobile site
