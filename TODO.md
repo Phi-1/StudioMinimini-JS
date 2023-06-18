@@ -1,2 +1,3 @@
+- fix being able to scroll page below store popup on mobile
 - add email api error handling
 - polish mobile site

@@ -36,6 +36,8 @@ class StorePopup {
         SocketHandler.listen("reservation_success", () => console.log("reservation success"))
         SocketHandler.listen("reservation_failure", () => console.log("reservation failure"))
         StorePopup.e_button_reserve.addEventListener("click", StorePopup.reserve_item_event)
+        // prevent scrolling on mobile
+        StorePopup.e_popup.addEventListener("ontouchstart", (event) => { event.preventDefault() })
     }
 
     static render(item_id, item_props) {

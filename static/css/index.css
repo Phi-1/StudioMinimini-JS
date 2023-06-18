@@ -453,6 +453,7 @@ body {
     /* Popup */
     .store__items__popup {
         inset: 0;
+        z-index: 3;
     }
 
     .btn-fullscreen {
